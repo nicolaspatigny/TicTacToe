@@ -24,18 +24,21 @@ function handleCellClick(cell, index) {
   if (boardState[index] === "" && gameActive) {
     boardState[index] = currentPlayer;
     cell.textContent = currentPlayer;
+    cell.classList.add(currentPlayer.toLowerCase());
 
     if (checkWin()) {
-      alert(`Player ${currentPlayer} wins!`);
-      gameActive = false;
-      resetGame();
+      setTimeout(() => {
+        alert(`Player ${currentPlayer} wins!`);
+        resetGame();
+      }, 100);
       return;
     }
 
     if (checkDraw()) {
-      alert("Game is a draw!");
-      gameActive = false;
-      resetGame();
+      setTimeout(() => {
+        alert("Game is a draw!");
+        resetGame();
+      }, 100);
       return;
     }
 
@@ -49,6 +52,7 @@ function resetGame() {
   boardState = ["", "", "", "", "", "", "", "", ""];
   cells.forEach((cell) => {
     cell.textContent = "";
+    cell.classList.remove("x", "o");
   });
 }
 
